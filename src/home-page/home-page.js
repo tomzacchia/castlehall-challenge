@@ -26,11 +26,13 @@ function HomePage() {
       </div>
 
       <div className="recipes-container">
-        <ul>
-          {recipes.map((recipe) => {
-            return <li key={recipe.id}>{recipe.name}</li>;
-          })}
-        </ul>
+        {!recipes ? (
+          <CircularProgress />
+        ) : (
+          recipes.map((recipe) => (
+            <RecipeSummaryCard key={recipe.id} recipe={recipe} />
+          ))
+        )}
       </div>
     </div>
   );

@@ -23,7 +23,6 @@ import HomePage from "./home-page/home-page";
 const App = () => {
   return (
     <div>
-      APP
       <HomePage />
     </div>
   );
