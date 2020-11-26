@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./home-page.scss";
 import api from "../api";
 
 function HomePage() {
@@ -11,9 +12,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="homePage">
-      <div className="homePageNavSpacer">
-        <div className="titleContainer">
+    <div className="homepage">
+      <div className="header-container">
+        <div className="title-container">
           <h1> Recipes</h1>
           <h2>
             Discover mouth watering recipes that your friends and family will
@@ -21,11 +22,14 @@ function HomePage() {
           </h2>
         </div>
       </div>
-      <ul>
-        {recipes.map((recipe) => {
-          return <li key={recipe.id}>{recipe.name}</li>;
-        })}
-      </ul>
+
+      <div className="recipes-container">
+        <ul>
+          {recipes.map((recipe) => {
+            return <li key={recipe.id}>{recipe.name}</li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 }
