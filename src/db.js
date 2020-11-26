@@ -44,7 +44,7 @@ const server = new Server({
     //   return recipes;
     // });
 
-    this.get("/recipe/details/:id", (schema, request) => {
+    this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
       var recipe = schema.recipes.find(id);
 

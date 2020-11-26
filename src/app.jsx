@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import api from "./api";
-
+import React from "react";
+import styles from "./app.modules.scss";
+import HomePage from "./home-page/home-page";
 /**
  * The API endpoints are availables as:
  *
@@ -20,23 +20,11 @@ import api from "./api";
  *
  */
 
-const App = (props) => {
-  const [recipes, setRecipes] = React.useState([]);
-
-  useEffect(() => {
-    api.get("/recipes").then(({ data }) => {
-      setRecipes(data.recipes);
-    });
-  }, []);
-
+const App = () => {
   return (
     <div>
-      Recipes:
-      <ul>
-        {recipes.map((recipe) => {
-          return <li key={recipe.id}>{recipe.name}</li>;
-        })}
-      </ul>
+      APP
+      <HomePage />
     </div>
   );
 };
