@@ -20,9 +20,8 @@ import React from "react";
  */
 
 const App = (props) => {
-  console.log(process.env.API_URL);
   const [recipes, setRecipes] = React.useState(() => {
-    fetch(`/recipes`).then((resp) => {
+    fetch(`${process.env.API_URL}/recipes`).then((resp) => {
       resp.json().then((json) => {
         setRecipes(json.recipes);
       });
