@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./app.modules.scss";
+
 import HomePage from "./home-page/home-page";
 /**
  * The API endpoints are availables as:
