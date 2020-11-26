@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import api from "./api";
 
 /**
  * The API endpoints are availables as:
@@ -20,15 +21,13 @@ import React from "react";
  */
 
 const App = (props) => {
-  const [recipes, setRecipes] = React.useState(() => {
-    fetch(`${process.env.API_URL}/recipes`).then((resp) => {
-      resp.json().then((json) => {
-        setRecipes(json.recipes);
-      });
-    });
+  const [recipes, setRecipes] = React.useState([]);
 
-    return [];
-  });
+  useEffect(() => {
+    api.get("/recipes").then(({ data }) => {
+      setRecipes(data.recipes);
+    });
+  }, []);
 
   return (
     <div>
