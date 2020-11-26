@@ -11,7 +11,7 @@ var config = () => {
   }, {});
 
   return {
-    entry: "./main.js",
+    entry: "./src/main.js",
     watch: true,
     output: {
       path: __dirname,
