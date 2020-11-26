@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./home-page.scss";
 import api from "../api";
+import { CircularProgress } from "@material-ui/core";
+import RecipeSummaryCard from "../components/recipe-summary-card/recipe-summary-card.jsx";
 
 function HomePage() {
   const [recipes, setRecipes] = useState([]);

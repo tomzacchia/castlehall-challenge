@@ -1,0 +1,11 @@
+.recipe-summary-card {
+}
+
+$image-container-size: 200px;
+
+.recipe-summary-card .image-container {
+  width: $image-container-size;
+  height: $image-container-size;
+  background-size: cover;
+  background-position: center;
+}
