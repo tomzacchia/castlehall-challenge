@@ -14,6 +14,7 @@ var config = () => {
     entry: "./main.js",
     watch: true,
     output: {
+      path: __dirname,
       filename: "index.js",
     },
     module: {
