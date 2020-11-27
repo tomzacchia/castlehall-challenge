@@ -11,15 +11,15 @@ import api from "../../api";
 import "./create-recipe.scss";
 
 /*
-imgUrl: string
-ingredients: [ingredientIds]
-name: string
+request body format
+  imgUrl: string
+  ingredients: [ingredientIds]
+  name: string
 */
 
 function CreateRecipe() {
   let [ingredients, setIngredients] = useState([]);
   let { register, handleSubmit } = useForm();
-  // const classes = useStyles();
 
   useEffect(() => {
     api.get("/ingredients").then(({ data }) => {
@@ -28,7 +28,14 @@ function CreateRecipe() {
   }, []);
 
   function onSubmit(data) {
-    let formattedData = formatFormData({ ...data });
+    let formattedRecipe = formatFormData({ ...data });
+
+    api
+      .post("/recipes", formattedRecipe)
+      .then(() => {
+        alert(`${formattedRecipe.name} succesfully added`);
+      })
+      .catch((error) => console.log(error));
   }
 
   return (
@@ -42,6 +49,7 @@ function CreateRecipe() {
           label="name"
           inputRef={register}
           required
+          defaultValue="delicious pizza"
         />
 
         <TextField
@@ -52,6 +60,7 @@ function CreateRecipe() {
           label="Recipe Image URL"
           inputRef={register}
           required
+          defaultValue={`https://images.unsplash.com/photo-1544982503-9f984c14501a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80`}
         />
 
         <Typography variant="body2" component="p">
