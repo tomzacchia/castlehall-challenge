@@ -28,9 +28,7 @@ function CreateIngredient() {
   }
 
   return (
-    <div
-      style={{ marginTop: "2rem", display: "flex", justifyContent: "center" }}
-    >
+    <div className="center-form">
       <form
         style={{ display: "flex", flexDirection: "column", width: "500px" }}
         onSubmit={handleSubmit(onSubmit)}
