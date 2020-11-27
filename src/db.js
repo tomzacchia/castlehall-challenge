@@ -34,25 +34,16 @@ const server = new Server({
       var recipesCollection = schema.recipes.all();
 
       var recipes = recipesCollection.models;
-      var ingredientIDs = recipes[0].attrs.ingredients;
 
-      var ingredients = schema.ingredients.find(ingredientIDs).models;
+      recipes.forEach((model) => {
+        var ingredientIDs = model.attrs.ingredients;
 
-      var metadata = ingredients.reduce(
-        (acc, model) => {
-          var modelCalories = model.attrs.calories;
-          var modelIsVegetarian = model.attrs.vegetarian;
+        var ingredients = schema.ingredients.find(ingredientIDs).models;
 
-          acc.calories += modelCalories;
+        var metadata = makeIngredientsMetadata(ingredients);
 
-          if (acc.isVegeterian && !modelIsVegetarian) acc.isVegeterian = false;
-
-          return acc;
-        },
-        { calories: 0, isVegeterian: true }
-      );
-
-      recipes[0].attrs.metadata = metadata;
+        model.attrs.metadata = metadata;
+      });
 
       return recipesCollection;
     });
@@ -82,6 +73,22 @@ const server = new Server({
     });
   },
 });
+
+function makeIngredientsMetadata(ingredients) {
+  return ingredients.reduce(
+    (acc, model) => {
+      var modelCalories = model.attrs.calories;
+      var modelIsVegetarian = model.attrs.vegetarian;
+
+      acc.calories += modelCalories;
+
+      if (acc.isVegeterian && !modelIsVegetarian) acc.isVegeterian = false;
+
+      return acc;
+    },
+    { calories: 0, isVegeterian: true }
+  );
+}
 
 server.db.loadData({
   ingredients: [
