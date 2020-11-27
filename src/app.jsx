@@ -47,15 +47,9 @@ const App = () => {
         </div>
 
         <Switch>
-          <Route path="/recipe/:id">
-            <RecipeDetailsPage />
-          </Route>
-          <Route path="/create-ingredient">
-            <CreateIngredient />
-          </Route>
-          <Route path="/">
-            <HomePage />
-          </Route>
+          <Route path="/recipe/:id" component={RecipeDetailsPage}></Route>
+          <Route path="/create-ingredient" component={CreateIngredient}></Route>
+          <Route path="/" component={HomePage}></Route>
         </Switch>
       </Router>
     </div>
