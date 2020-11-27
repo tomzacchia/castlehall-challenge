@@ -58,11 +58,6 @@ const App = () => {
           </Route>
         </Switch>
       </Router>
-
-      {/* <Router>
-        <RecipeDetailsPage path="/#/recipe/:id" />
-        <CreateIngredient path="/#/create-ingredient" />
-      </Router> */}
     </div>
   );
 };
