@@ -28,30 +28,15 @@ const server = new Server({
     this.namespace = "";
 
     this.resource("recipe");
-    // this.resource("ingredient");
-
-    // this.get("/recipes", (schema) => {
-    //   var recipes = schema.recipes.all();
-
-    //   recipes.models.map((model) => {
-    //     var ingredientIDs = model.attrs.ingredients;
-    //     var ingredients = schema.ingredients.find(ingredientIDs);
-    //     model.attrs.ingredients = ingredients.models;
-
-    //     return model;
-    //   });
-
-    //   return recipes;
-    // });
 
     this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
       var recipe = schema.recipes.find(id);
 
-      var ingredientIDs = recipe.models[0].attrs.ingredients;
+      var ingredientIDs = recipe.attrs.ingredients;
       var ingredients = schema.ingredients.find(ingredientIDs);
 
-      recipe.models[0].attrs.ingredients = ingredients.models;
+      recipe.attrs.ingredients = ingredients.models;
 
       return recipe;
     });
