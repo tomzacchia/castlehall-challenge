@@ -28,7 +28,7 @@ const server = new Server({
     this.namespace = "";
 
     this.resource("recipe");
-    // this.resource("ingredient");
+    this.resource("ingredient");
 
     this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
