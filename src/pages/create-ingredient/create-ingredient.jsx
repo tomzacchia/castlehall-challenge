@@ -9,6 +9,7 @@ import {
   Radio,
   RadioGroup,
 } from "@material-ui/core";
+import api from "../../api";
 
 /*  
   name: string,
@@ -24,7 +25,29 @@ function CreateIngredient() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(name, isVegeterian, calories);
+    const ingredient = formatRequestBody();
+
+    api
+      .post("/ingredients", ingredient)
+      .then(({ statusText }) => {
+        resetFields();
+        alert(`successfully ${statusText.toLowerCase()}`);
+      })
+      .catch(() => alert("error"));
+  }
+
+  function resetFields() {
+    setName("");
+    setIsVegeterian("false");
+    setCalories("");
+  }
+
+  function formatRequestBody() {
+    return {
+      name,
+      calories,
+      isVegeterian: isVegeterian,
+    };
   }
 
   return (
