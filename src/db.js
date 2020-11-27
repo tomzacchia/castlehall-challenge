@@ -30,6 +30,33 @@ const server = new Server({
     this.resource("recipe");
     this.resource("ingredient");
 
+    this.get("/recipes", (schema) => {
+      var recipesCollection = schema.recipes.all();
+
+      var recipes = recipesCollection.models;
+      var ingredientIDs = recipes[0].attrs.ingredients;
+
+      var ingredients = schema.ingredients.find(ingredientIDs).models;
+
+      var metadata = ingredients.reduce(
+        (acc, model) => {
+          var modelCalories = model.attrs.calories;
+          var modelIsVegetarian = model.attrs.vegetarian;
+
+          acc.calories += modelCalories;
+
+          if (acc.isVegeterian && !modelIsVegetarian) acc.isVegeterian = false;
+
+          return acc;
+        },
+        { calories: 0, isVegeterian: true }
+      );
+
+      recipes[0].attrs.metadata = metadata;
+
+      return recipesCollection;
+    });
+
     this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
       var recipe = schema.recipes.find(id);
