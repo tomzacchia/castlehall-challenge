@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Router } from "@reach/router";
+import { Link, HashRouter as Router, Switch, Route } from "react-router-dom";
 import "./app.styles.scss";
 import HomePage from "./pages/home-page/home-page";
 import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
@@ -27,29 +27,42 @@ import CreateIngredient from "./pages/create-ingredient/create-ingredient.jsx";
 const App = () => {
   return (
     <div>
-      <div className="navbar">
-        <Link to="/">
-          <Button variant="contained" color="secondary">
-            Home
-          </Button>
-        </Link>
-        <Link to="/create-ingredient">
-          <Button variant="contained" color="primary">
-            Add Ingredient
-          </Button>
-        </Link>
-        <Link to="/create-recipe">
-          <Button variant="contained" color="primary">
-            Add Recipe
-          </Button>
-        </Link>
-      </div>
+      <Router>
+        <div className="navbar">
+          <Link to="/">
+            <Button variant="contained" color="secondary">
+              Home
+            </Button>
+          </Link>
+          <Link to="/create-ingredient">
+            <Button variant="contained" color="primary">
+              Add Ingredient
+            </Button>
+          </Link>
+          <Link to="/create-recipe">
+            <Button variant="contained" color="primary">
+              Add Recipe
+            </Button>
+          </Link>
+        </div>
 
-      <Router primary={false}>
-        <HomePage path="/" default />
-        <RecipeDetailsPage path="/recipe/:id" />
-        <CreateIngredient path="/create-ingredient" />
+        <Switch>
+          <Route path="/recipe/:id">
+            <RecipeDetailsPage />
+          </Route>
+          <Route path="/create-ingredient">
+            <CreateIngredient />
+          </Route>
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
       </Router>
+
+      {/* <Router>
+        <RecipeDetailsPage path="/#/recipe/:id" />
+        <CreateIngredient path="/#/create-ingredient" />
+      </Router> */}
     </div>
   );
 };
