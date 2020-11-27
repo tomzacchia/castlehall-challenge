@@ -1,8 +1,9 @@
 import React from "react";
-import { Router } from "@reach/router";
+import { Link, Router } from "@reach/router";
 import "./app.styles.scss";
 import HomePage from "./pages/home-page/home-page";
 import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
+import { Button } from "@material-ui/core";
 /**
  * The API endpoints are availables as:
  *
@@ -25,7 +26,25 @@ import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
 const App = () => {
   return (
     <div>
-      <Router>
+      <div className="navbar">
+        <Link to="/">
+          <Button variant="contained" color="secondary">
+            Home
+          </Button>
+        </Link>
+        <Link to="/create-ingredient">
+          <Button variant="contained" color="primary">
+            Add Ingredient
+          </Button>
+        </Link>
+        <Link to="/create-recipe">
+          <Button variant="contained" color="primary">
+            Add Recipe
+          </Button>
+        </Link>
+      </div>
+
+      <Router primary={false}>
         <HomePage path="/" default />
         <RecipeDetailsPage path="/recipe/:id" />
       </Router>
