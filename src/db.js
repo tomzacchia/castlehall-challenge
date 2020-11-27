@@ -28,7 +28,7 @@ const server = new Server({
     this.namespace = "";
 
     this.resource("recipe");
-    // this.resource("ingredient");
+    this.resource("ingredient");
 
     this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
@@ -40,6 +40,12 @@ const server = new Server({
       recipe.attrs.ingredients = ingredients.models;
 
       return recipe;
+    });
+
+    this.post("/recipes", (schema, request) => {
+      let attrs = JSON.parse(request.requestBody);
+
+      return schema.recipes.create(attrs);
     });
 
     this.post("/ingredients", (schema, request) => {
