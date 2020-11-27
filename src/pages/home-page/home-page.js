@@ -25,6 +25,8 @@ function HomePage() {
         </div>
       </div>
 
+      {/* recipes filter */}
+
       <div className="recipes-container">
         {!recipes ? (
           <CircularProgress />

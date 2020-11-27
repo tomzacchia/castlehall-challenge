@@ -146,6 +146,18 @@ server.db.loadData({
       vegetarian: true,
       calories: 73,
     },
+    {
+      id: 10,
+      name: "pizza dough",
+      vegetarian: true,
+      calories: 125,
+    },
+    {
+      id: 11,
+      name: "tomato sauce",
+      vegetarian: true,
+      calories: 30,
+    },
   ],
   recipes: [
     {
