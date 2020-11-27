@@ -37,10 +37,12 @@ function RecipeDetailsPage() {
         image={recipe.imgUrl}
         title={recipe.name}
       ></CardMedia>
+
       <CardContent>
         <Typography variant="h5" component="h2">
           {recipe.name}
         </Typography>
+
         {recipe.ingredients.map((ingredient) => (
           <Typography variant="body2" key={ingredient.id} component="p">
             {ingredient.name} - Calories: {ingredient.calories}
