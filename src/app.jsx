@@ -1,6 +1,8 @@
 import React from "react";
+import { Router } from "@reach/router";
 import "./app.styles.scss";
-import HomePage from "./home-page/home-page";
+import HomePage from "./pages/home-page/home-page";
+import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
 /**
  * The API endpoints are availables as:
  *
@@ -23,7 +25,10 @@ import HomePage from "./home-page/home-page";
 const App = () => {
   return (
     <div>
-      <HomePage />
+      <Router>
+        <HomePage path="/" default />
+        <RecipeDetailsPage path="/recipe/:id" />
+      </Router>
     </div>
   );
 };
