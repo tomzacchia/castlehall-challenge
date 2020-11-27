@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
-  FormControl,
+  Checkbox,
   FormControlLabel,
-  FormLabel,
-  Input,
-  InputLabel,
-  Radio,
-  RadioGroup,
+  TextField,
 } from "@material-ui/core";
 import api from "../../api";
+import { useForm } from "react-hook-form";
 
 /*  
   name: string,
@@ -18,86 +15,55 @@ import api from "../../api";
 */
 
 function CreateIngredient() {
-  var [name, setName] = useState("");
-  var [isVegeterian, setIsVegeterian] = useState("false");
-  var [calories, setCalories] = useState("");
+  var { register, handleSubmit, reset } = useForm();
 
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    const ingredient = formatRequestBody();
-
+  function onSubmit(data) {
     api
-      .post("/ingredients", ingredient)
+      .post("/ingredients", data)
       .then(({ statusText }) => {
-        resetFields();
+        reset();
         alert(`successfully ${statusText.toLowerCase()}`);
       })
       .catch(() => alert("error"));
   }
 
-  function resetFields() {
-    setName("");
-    setIsVegeterian("false");
-    setCalories("");
-  }
-
-  function formatRequestBody() {
-    return {
-      name,
-      calories,
-      isVegeterian: isVegeterian,
-    };
-  }
-
   return (
-    <div>
+    <div className="center-form">
       <form
-        action=""
-        style={{ display: "flex", flexDirection: "column" }}
-        onSubmit={handleSubmit}
+        style={{ display: "flex", flexDirection: "column", width: "500px" }}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <FormControl>
-          <InputLabel htmlFor="ingredient-name"> Name </InputLabel>
-          <Input
-            id="ingredient-name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </FormControl>
+        <TextField
+          margin="normal"
+          variant="outlined"
+          name="name"
+          id="name"
+          label="name"
+          inputRef={register}
+          required
+        />
 
-        <FormControl>
-          <FormLabel htmlFor="ingredient-vegeterian"> Vegeterian </FormLabel>
-          <RadioGroup
-            aria-label="ingredient-vegeterian"
-            name="ingredient-vegeterian"
-            value={isVegeterian}
-            onChange={(e) => setIsVegeterian(e.target.value)}
-            required
-          >
-            <FormControlLabel value="true" control={<Radio />} label="Yes" />
-            <FormControlLabel value="false" control={<Radio />} label="No" />
-          </RadioGroup>
+        <FormControlLabel
+          control={
+            <Checkbox color="primary" name={"vegetarian"} inputRef={register} />
+          }
+          label={"Vegetarian"}
+        />
 
-          <FormControl>
-            <InputLabel htmlFor="ingredient-calories">
-              Number of Calories
-            </InputLabel>
-            <Input
-              id="ingredient-calories"
-              type="number"
-              value={calories}
-              onChange={(e) => setCalories(e.target.value)}
-              required
-            />
-          </FormControl>
+        <TextField
+          margin="normal"
+          variant="outlined"
+          name="calories"
+          id="calories"
+          label="calories"
+          inputRef={register}
+          required
+          type="number"
+        />
 
-          <Button variant="contained" color="primary" type="submit">
-            SUBMIT
-          </Button>
-        </FormControl>
+        <Button variant="contained" color="primary" type="submit">
+          SUBMIT
+        </Button>
       </form>
     </div>
   );

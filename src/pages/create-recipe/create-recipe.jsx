@@ -39,7 +39,7 @@ function CreateRecipe() {
   }
 
   return (
-    <div className="create-recipe-page">
+    <div className="create-recipe-page center-form">
       <form onSubmit={handleSubmit(onSubmit)}>
         <TextField
           margin="normal"
