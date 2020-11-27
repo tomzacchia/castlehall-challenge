@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgress } from "@material-ui/core";
 import api from "../../api";
+import { useParams } from "react-router";
 
-function RecipeDetailsPage({ id: recipeId }) {
+function RecipeDetailsPage() {
+  let { id: recipeId } = useParams();
+
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {

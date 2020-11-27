@@ -1,9 +1,14 @@
 import React from "react";
-import { navigate } from "@reach/router";
 import "./recipe-summary-card.scss";
 import { Button } from "@material-ui/core";
+import { useHistory } from "react-router";
 
 function RecipeSummaryCard({ recipe }) {
+  let history = useHistory();
+
+  function clickHandler(id) {
+    history.push(`/recipe/${id}`);
+  }
   return (
     <div className="recipe-summary-card">
       <div
@@ -26,7 +31,3 @@ function RecipeSummaryCard({ recipe }) {
 }
 
 export default RecipeSummaryCard;
-
-function clickHandler(id) {
-  navigate(`/recipe/${id}`);
-}
