@@ -30,6 +30,24 @@ const server = new Server({
     this.resource("recipe");
     this.resource("ingredient");
 
+    this.get("/recipes", (schema) => {
+      var recipesCollection = schema.recipes.all();
+
+      var recipes = recipesCollection.models;
+
+      recipes.forEach((model) => {
+        var ingredientIDs = model.attrs.ingredients;
+
+        var ingredients = schema.ingredients.find(ingredientIDs).models;
+
+        var metadata = makeIngredientsMetadata(ingredients);
+
+        model.attrs.metadata = metadata;
+      });
+
+      return recipesCollection;
+    });
+
     this.get("/recipes/:id", (schema, request) => {
       let id = request.params.id;
       var recipe = schema.recipes.find(id);
@@ -56,6 +74,22 @@ const server = new Server({
   },
 });
 
+function makeIngredientsMetadata(ingredients) {
+  return ingredients.reduce(
+    (acc, model) => {
+      var modelCalories = model.attrs.calories;
+      var modelIsVegetarian = model.attrs.vegetarian;
+
+      acc.calories += modelCalories;
+
+      if (acc.isVegetarian && !modelIsVegetarian) acc.isVegetarian = false;
+
+      return acc;
+    },
+    { calories: 0, isVegetarian: true }
+  );
+}
+
 server.db.loadData({
   ingredients: [
     {
@@ -79,38 +113,50 @@ server.db.loadData({
     {
       id: 4,
       name: "hamburger patty",
-      vegeterian: false,
+      vegetarian: false,
       calories: 204,
     },
     {
       id: 5,
       name: "hamburger buns",
-      vegeterian: true,
+      vegetarian: true,
       calories: 263,
     },
     {
       id: 6,
       name: "lettuce",
-      vegeterian: true,
+      vegetarian: true,
       calories: 5,
     },
     {
       id: 7,
       name: "ketchup",
-      vegeterian: true,
+      vegetarian: true,
       calories: 19,
     },
     {
       id: 8,
       name: "tomatoes",
-      vegeterian: true,
+      vegetarian: true,
       calories: 22,
     },
     {
       id: 9,
       name: "ranch dressing",
-      vegeterian: true,
+      vegetarian: true,
       calories: 73,
+    },
+    {
+      id: 10,
+      name: "pizza dough",
+      vegetarian: true,
+      calories: 125,
+    },
+    {
+      id: 11,
+      name: "tomato sauce",
+      vegetarian: true,
+      calories: 30,
     },
   ],
   recipes: [

@@ -1,10 +1,10 @@
 .header-container {
-  height: 200px;
-  background-color: aliceblue;
+  height: 150px;
+  background-color: rgb(32, 117, 210);
   position: relative;
 }
 
-$title-container-height: 150px;
+$title-container-height: 125px;
 
 .header-container .title-container {
   margin-bottom: -($title-container-height / 2);
@@ -18,4 +18,7 @@ $title-container-height: 150px;
 
 .recipes-container {
   margin-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
