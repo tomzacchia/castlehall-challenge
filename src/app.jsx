@@ -5,6 +5,7 @@ import HomePage from "./pages/home-page/home-page";
 import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
 import { Button } from "@material-ui/core";
 import CreateIngredient from "./pages/create-ingredient/create-ingredient.jsx";
+import CreateRecipe from "./pages/create-recipe/create-recipe.jsx";
 /**
  * The API endpoints are availables as:
  *
@@ -49,6 +50,7 @@ const App = () => {
         <Switch>
           <Route path="/recipe/:id" component={RecipeDetailsPage}></Route>
           <Route path="/create-ingredient" component={CreateIngredient}></Route>
+          <Route path="/create-recipe" component={CreateRecipe}></Route>
           <Route path="/" component={HomePage}></Route>
         </Switch>
       </Router>
