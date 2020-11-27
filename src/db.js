@@ -82,11 +82,11 @@ function makeIngredientsMetadata(ingredients) {
 
       acc.calories += modelCalories;
 
-      if (acc.isVegeterian && !modelIsVegetarian) acc.isVegeterian = false;
+      if (acc.isVegetarian && !modelIsVegetarian) acc.isVegetarian = false;
 
       return acc;
     },
-    { calories: 0, isVegeterian: true }
+    { calories: 0, isVegetarian: true }
   );
 }
 
@@ -113,37 +113,37 @@ server.db.loadData({
     {
       id: 4,
       name: "hamburger patty",
-      vegeterian: false,
+      vegetarian: false,
       calories: 204,
     },
     {
       id: 5,
       name: "hamburger buns",
-      vegeterian: true,
+      vegetarian: true,
       calories: 263,
     },
     {
       id: 6,
       name: "lettuce",
-      vegeterian: true,
+      vegetarian: true,
       calories: 5,
     },
     {
       id: 7,
       name: "ketchup",
-      vegeterian: true,
+      vegetarian: true,
       calories: 19,
     },
     {
       id: 8,
       name: "tomatoes",
-      vegeterian: true,
+      vegetarian: true,
       calories: 22,
     },
     {
       id: 9,
       name: "ranch dressing",
-      vegeterian: true,
+      vegetarian: true,
       calories: 73,
     },
   ],
