@@ -4,6 +4,7 @@ import "./app.styles.scss";
 import HomePage from "./pages/home-page/home-page";
 import RecipeDetailsPage from "./pages/recipe-details/recipe-details.jsx";
 import { Button } from "@material-ui/core";
+import CreateIngredient from "./pages/create-ingredient/create-ingredient.jsx";
 /**
  * The API endpoints are availables as:
  *
@@ -47,6 +48,7 @@ const App = () => {
       <Router primary={false}>
         <HomePage path="/" default />
         <RecipeDetailsPage path="/recipe/:id" />
+        <CreateIngredient path="/create-ingredient" />
       </Router>
     </div>
   );

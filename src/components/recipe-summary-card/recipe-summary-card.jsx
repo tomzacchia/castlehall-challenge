@@ -1,6 +1,7 @@
 import React from "react";
 import { navigate } from "@reach/router";
 import "./recipe-summary-card.scss";
+import { Button } from "@material-ui/core";
 
 function RecipeSummaryCard({ recipe }) {
   return (
@@ -11,13 +12,15 @@ function RecipeSummaryCard({ recipe }) {
       ></div>
       <h2>{recipe.name}</h2>
 
-      <button
+      <Button
+        variant="contained"
+        color="secondary"
         onClick={() => {
           clickHandler(recipe.id);
         }}
       >
         View Details
-      </button>
+      </Button>
     </div>
   );
 }

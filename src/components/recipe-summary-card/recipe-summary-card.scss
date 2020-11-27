@@ -1,4 +1,9 @@
 .recipe-summary-card {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  width: max-content;
+  border: solid thin black;
+  border-radius: 6px;
 }
 
 $image-container-size: 200px;
