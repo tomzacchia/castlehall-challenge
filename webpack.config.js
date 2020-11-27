@@ -1,6 +1,7 @@
 // var path = require("path");
 const webpack = require("webpack");
 const dotenv = require("dotenv");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 var config = () => {
   //https://medium.com/@trekinbami/using-environment-variables-in-react-6b0a99d83cf5
@@ -29,12 +30,32 @@ var config = () => {
             },
           },
         },
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: "style-loader",
+            },
+            {
+              loader: "css-loader",
+            },
+            {
+              loader: "sass-loader",
+            },
+          ],
+        },
       ],
     },
-    plugins: [new webpack.DefinePlugin(envKeys)],
+    plugins: [
+      new webpack.DefinePlugin(envKeys),
+      // new HtmlWebpackPlugin({
+      //   template: "./dist/index.html",
+      // }),
+    ],
     devServer: {
       contentBase: "./dist",
       overlay: true,
+      // historyApiFallback: true,
     },
   };
 };
